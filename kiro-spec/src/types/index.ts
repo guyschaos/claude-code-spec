@@ -55,7 +55,7 @@ export enum ErrorType {
 export interface ExtensionError {
   type: ErrorType;
   message: string;
-  details?: any;
+  details?: unknown;
   recovery?: string;
 }
 

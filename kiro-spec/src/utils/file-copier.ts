@@ -132,7 +132,7 @@ export class FileCopier {
   /**
    * 创建扩展错误对象
    */
-  private createError(type: ErrorType, message: string, details?: any): ExtensionError {
+  private createError(type: ErrorType, message: string, details?: unknown): ExtensionError {
     return {
       type,
       message,
