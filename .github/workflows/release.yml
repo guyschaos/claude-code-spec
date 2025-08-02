@@ -30,15 +30,6 @@ jobs:
         working-directory: ./kiro-spec
         run: npm ci
         
-      - name: 运行代码检查
-        working-directory: ./kiro-spec
-        run: |
-          npm run lint
-          
-      - name: 编译 TypeScript
-        working-directory: ./kiro-spec
-        run: npm run compile
-        
       - name: 提取版本号
         id: get_version
         run: |
@@ -47,18 +38,24 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           
-      - name: 验证版本号一致性
+      - name: 自动同步版本号
         working-directory: ./kiro-spec
         run: |
+          echo "🔄 从Git标签自动同步版本号到package.json..."
+          npm run sync-version
+          
+          # 验证同步结果
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          if [ "$PACKAGE_VERSION" != "${{ steps.get_version.outputs.version }}" ]; then
-            echo "❌ 版本号不一致！"
-            echo "Git 标签版本: ${{ steps.get_version.outputs.version }}"
-            echo "package.json 版本: $PACKAGE_VERSION"
-            exit 1
-          else
-            echo "✅ 版本号验证通过: $PACKAGE_VERSION"
-          fi
+          echo "✅ 版本号已同步: $PACKAGE_VERSION"
+          
+      - name: 运行代码检查
+        working-directory: ./kiro-spec
+        run: |
+          npm run lint
+          
+      - name: 编译 TypeScript
+        working-directory: ./kiro-spec
+        run: npm run compile
           
       - name: 生成 VSIX 文件
         working-directory: ./kiro-spec

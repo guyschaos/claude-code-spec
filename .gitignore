@@ -78,3 +78,5 @@ docs/kiro/prompt/
 
 kiro-spec/templates/
 kiro-spec/*.vsix
+
+*.js.map
