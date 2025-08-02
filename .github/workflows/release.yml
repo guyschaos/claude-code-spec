@@ -1,0 +1,132 @@
+name: Release VSIX
+
+on:
+  push:
+    tags:
+      - 'v*'  # 触发条件：推送以 'v' 开头的标签
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write  # 需要写权限来创建release
+      
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史以便生成changelog
+          
+      - name: 设置 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'kiro-spec/package-lock.json'
+          
+      - name: 安装项目依赖
+        working-directory: ./kiro-spec
+        run: npm ci
+        
+      - name: 运行代码检查
+        working-directory: ./kiro-spec
+        run: |
+          npm run lint
+          
+      - name: 编译 TypeScript
+        working-directory: ./kiro-spec
+        run: npm run compile
+        
+      - name: 提取版本号
+        id: get_version
+        run: |
+          # 从git标签中提取版本号
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          
+      - name: 验证版本号一致性
+        working-directory: ./kiro-spec
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$PACKAGE_VERSION" != "${{ steps.get_version.outputs.version }}" ]; then
+            echo "❌ 版本号不一致！"
+            echo "Git 标签版本: ${{ steps.get_version.outputs.version }}"
+            echo "package.json 版本: $PACKAGE_VERSION"
+            exit 1
+          else
+            echo "✅ 版本号验证通过: $PACKAGE_VERSION"
+          fi
+          
+      - name: 生成 VSIX 文件
+        working-directory: ./kiro-spec
+        run: |
+          # 安装 vsce 工具
+          npm install -g @vscode/vsce
+          # 打包生成 VSIX
+          npm run package
+          
+      - name: 验证 VSIX 文件
+        working-directory: ./kiro-spec
+        run: |
+          VSIX_FILE="kiro-spec-${{ steps.get_version.outputs.version }}.vsix"
+          if [ ! -f "$VSIX_FILE" ]; then
+            echo "❌ VSIX 文件未找到: $VSIX_FILE"
+            exit 1
+          fi
+          
+          # 验证VSIX文件完整性
+          file_size=$(stat -c%s "$VSIX_FILE")
+          if [ $file_size -lt 1000 ]; then
+            echo "❌ VSIX 文件太小，可能构建失败"
+            exit 1
+          fi
+          
+          echo "✅ VSIX 文件验证通过: $VSIX_FILE (${file_size} bytes)"
+          
+      - name: 生成发布说明
+        id: release_notes
+        run: |
+          # 获取最近的两个标签之间的提交记录
+          PREVIOUS_TAG=$(git tag --sort=-version:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | sed -n '2p')
+          
+          if [ -n "$PREVIOUS_TAG" ]; then
+            echo "## 🚀 新功能和改进" >> release_notes.md
+            echo "" >> release_notes.md
+            git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..${{ steps.get_version.outputs.tag }} >> release_notes.md
+            echo "" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          echo "## 📦 安装方式" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "1. 下载 \`kiro-spec-${{ steps.get_version.outputs.version }}.vsix\` 文件" >> release_notes.md
+          echo "2. 在 VS Code 中使用 \`Extensions: Install from VSIX\` 命令安装" >> release_notes.md
+          echo "3. 或通过命令行安装: \`code --install-extension kiro-spec-${{ steps.get_version.outputs.version }}.vsix\`" >> release_notes.md
+          
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.tag }}
+          name: "Kiro Spec v${{ steps.get_version.outputs.version }}"
+          body_path: release_notes.md
+          files: |
+            kiro-spec/kiro-spec-${{ steps.get_version.outputs.version }}.vsix
+          draft: false
+          prerelease: ${{ contains(steps.get_version.outputs.version, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: 构建完成通知
+        if: success()
+        run: |
+          echo "🎉 VSIX 构建和发布成功！"
+          echo "📋 版本: ${{ steps.get_version.outputs.version }}"
+          echo "🔗 下载链接: https://github.com/${{ github.repository }}/releases/tag/${{ steps.get_version.outputs.tag }}"
+          
+      - name: 构建失败通知
+        if: failure()
+        run: |
+          echo "❌ VSIX 构建或发布失败！"
+          echo "请检查构建日志以获取详细错误信息。"

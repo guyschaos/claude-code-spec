@@ -17,17 +17,45 @@
 
 ## 设置
 
-### 集成到你的项目
+### 🎯 推荐方式：使用Kiro Spec VS Code扩展（一键安装）
 
-要将Claude Code规格驱动开发集成到你的项目中，只需复制以下2个文件/目录：
+我们提供了专门的VS Code扩展来自动化安装和配置过程：
 
-1. **`.claude/commands/` 目录** - Slash Commands的定义
-2. **`CLAUDE.md` 文件** - Claude Code的设置和项目指示
+#### 安装Kiro Spec扩展
 
-### 初始设置步骤
+1. **下载VSIX文件**：
+   - 访问 [GitHub Releases页面](https://github.com/kiro-code/kiro-spec/releases)
+   - 下载最新的 `kiro-spec-x.x.x.vsix` 文件
 
-1. **复制文件**（如上所述）
-2. **复制CLAUDE.md**并根据项目进行调整
+2. **安装扩展**：
+   - 在VS Code中按 `Ctrl+Shift+P` (Windows/Linux) 或 `Cmd+Shift+P` (macOS)
+   - 输入 `Extensions: Install from VSIX...`
+   - 选择下载的VSIX文件
+
+3. **一键初始化项目**：
+   - 打开您的项目目录
+   - 按 `Ctrl+Shift+P` 打开命令面板
+   - 输入 `Kiro Spec: 初始化项目`
+   - 选择语言版本（中文/英文/日文/繁体中文）
+   - 完成！所有必需文件已自动安装
+
+#### 扩展功能
+- ✅ **自动安装** - 一键安装所有`.claude/commands`和`CLAUDE.md`文件
+- ✅ **多语言支持** - 支持中文、英文、日文、繁体中文四种语言
+- ✅ **智能检测** - 自动检测安装状态，避免重复安装
+- ✅ **状态检查** - 随时查看配置完整性
+- ✅ **强制重装** - 可覆盖现有配置更新到最新版本
+
+### 手动集成到项目（传统方式）
+
+如果您不使用VS Code扩展，也可以手动集成：
+
+1. **复制文件**：
+   - `.claude/commands/` 目录 - Slash Commands的定义
+   - `CLAUDE.md` 文件 - Claude Code的设置和项目指示
+
+2. **调整配置**：复制CLAUDE.md并根据项目进行调整
+
 3. **执行初始命令**：
    ```bash
    # 可选：创建引导文档

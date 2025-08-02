@@ -1,0 +1,94 @@
+{
+  "name": "kiro-spec",
+  "displayName": "Kiro Spec - 规格驱动开发自动化安装",
+  "description": "为Claude Code规格驱动开发项目提供一键式自动化安装和配置功能",
+  "version": "1.0.0",
+  "publisher": "kiro-code",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "claude-code",
+    "spec-driven",
+    "kiro",
+    "automation",
+    "project-setup"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kiro-spec.initProject",
+        "title": "初始化项目",
+        "category": "Kiro Spec"
+      },
+      {
+        "command": "kiro-spec.forceReinstall",
+        "title": "强制重新安装",
+        "category": "Kiro Spec"
+      },
+      {
+        "command": "kiro-spec.checkStatus",
+        "title": "检查安装状态",
+        "category": "Kiro Spec"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "kiro-spec.initProject",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "kiro-spec.forceReinstall",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "kiro-spec.checkStatus",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run copy-templates && npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "copy-templates": "node scripts/copy-templates.js",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "npm run copy-templates && vsce package",
+    "publish": "npm run copy-templates && vsce publish"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^2.15.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiro-code/kiro-spec.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiro-code/kiro-spec/issues"
+  },
+  "homepage": "https://github.com/kiro-code/kiro-spec#readme",
+  "license": "MIT"
+}

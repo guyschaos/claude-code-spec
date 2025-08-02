@@ -76,3 +76,6 @@ BLOG.md
 .claude/hooks/
 
 docs/kiro/prompt/
+
+kiro-spec/templates/
+kiro-spec/*.vsix
