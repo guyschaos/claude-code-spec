@@ -25,8 +25,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StatusCommand = void 0;
 const vscode = __importStar(require("vscode"));
-const file_manager_1 = require("@/managers/file-manager");
-const notifications_1 = require("@/utils/notifications");
+const file_manager_1 = require("../managers/file-manager");
+const notifications_1 = require("../utils/notifications");
 /**
  * 检查安装状态命令
  */

@@ -25,9 +25,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
 const vscode = __importStar(require("vscode"));
-const init_command_1 = require("@/commands/init-command");
-const status_command_1 = require("@/commands/status-command");
-const force_reinstall_command_1 = require("@/commands/force-reinstall-command");
+const init_command_1 = require("./commands/init-command");
+const status_command_1 = require("./commands/status-command");
+const force_reinstall_command_1 = require("./commands/force-reinstall-command");
 /**
  * 扩展激活时调用
  */

@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileCopier = void 0;
 const path = __importStar(require("path"));
 const fs = __importStar(require("fs-extra"));
-const types_1 = require("@/types");
+const types_1 = require("../types");
 /**
  * 文件复制器 - 负责复制模板文件到目标项目
  */

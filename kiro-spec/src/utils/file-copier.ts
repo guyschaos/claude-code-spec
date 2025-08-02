@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { SupportedLanguage, ExtensionError, ErrorType } from '@/types';
+import { SupportedLanguage, ExtensionError, ErrorType } from '../types';
 
 /**
  * 文件复制器 - 负责复制模板文件到目标项目

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { InitCommand } from '@/commands/init-command';
-import { StatusCommand } from '@/commands/status-command';
-import { ForceReinstallCommand } from '@/commands/force-reinstall-command';
+import { InitCommand } from './commands/init-command';
+import { StatusCommand } from './commands/status-command';
+import { ForceReinstallCommand } from './commands/force-reinstall-command';
 
 /**
  * 扩展激活时调用

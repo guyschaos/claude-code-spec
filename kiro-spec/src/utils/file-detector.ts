@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { InstallationStatus, SupportedLanguage } from '@/types';
+import { InstallationStatus, SupportedLanguage } from '../types';
 
 /**
  * 文件检测器 - 负责检测项目安装状态

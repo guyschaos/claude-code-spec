@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { FileManager } from '@/managers/file-manager';
-import { NotificationManager } from '@/utils/notifications';
-import { SupportedLanguage } from '@/types';
+import { FileManager } from '../managers/file-manager';
+import { NotificationManager } from '../utils/notifications';
+import { SupportedLanguage } from '../types';
 
 /**
  * 初始化项目命令

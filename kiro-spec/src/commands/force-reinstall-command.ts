@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { FileManager } from '@/managers/file-manager';
-import { NotificationManager } from '@/utils/notifications';
+import { FileManager } from '../managers/file-manager';
+import { NotificationManager } from '../utils/notifications';
 
 /**
  * 强制重新安装命令

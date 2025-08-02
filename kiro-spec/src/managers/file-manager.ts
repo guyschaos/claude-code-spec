@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
-import { FileDetector } from '@/utils/file-detector';
-import { FileCopier } from '@/utils/file-copier';
-import { NotificationManager } from '@/utils/notifications';
-import { InstallationStatus, StatusResult, SupportedLanguage } from '@/types';
+import { FileDetector } from '../utils/file-detector';
+import { FileCopier } from '../utils/file-copier';
+import { NotificationManager } from '../utils/notifications';
+import { InstallationStatus, StatusResult, SupportedLanguage } from '../types';
 
 /**
  * 文件管理器 - 统筹文件操作

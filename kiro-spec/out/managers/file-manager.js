@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileManager = void 0;
-const file_detector_1 = require("@/utils/file-detector");
-const file_copier_1 = require("@/utils/file-copier");
-const notifications_1 = require("@/utils/notifications");
+const file_detector_1 = require("../utils/file-detector");
+const file_copier_1 = require("../utils/file-copier");
+const notifications_1 = require("../utils/notifications");
 /**
  * 文件管理器 - 统筹文件操作
  */

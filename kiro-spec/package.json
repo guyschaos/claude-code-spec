@@ -2,7 +2,7 @@
   "name": "kiro-spec",
   "displayName": "Kiro Spec - 规格驱动开发自动化安装",
   "description": "为Claude Code规格驱动开发项目提供一键式自动化安装和配置功能",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "kiro-code",
   "engines": {
     "vscode": "^1.74.0"
