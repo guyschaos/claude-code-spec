@@ -18,8 +18,8 @@ Generate detailed implementation tasks for feature: **$ARGUMENTS**
 
 **Interactive Approval Process**:
 1. **Check if documents exist** - Verify that requirements.md and design.md have been generated
-2. **Prompt for requirements review** - Ask user: "requirements.mdをレビューしましたか？ [y/N]"
-3. **Prompt for design review** - Ask user: "design.mdをレビューしましたか？ [y/N]"
+2. **Prompt for requirements review** - Ask user: "你已经审核了requirements.md吗？ [y/N]"
+3. **Prompt for design review** - Ask user: "你已经审核了design.md吗？ [y/N]"
 4. **If both 'y' (yes)**: Automatically update spec.json to approve both phases and proceed with tasks generation
 5. **If any 'N' (no)**: Stop execution and instruct user to review respective documents first
 
@@ -44,9 +44,9 @@ Generate detailed implementation tasks for feature: **$ARGUMENTS**
 ```
 📋 Requirements and Design review required before generating tasks.
 📄 Please review: .kiro/specs/feature-name/requirements.md
-❓ requirements.mdをレビューしましたか？ [y/N]: y
+❓ 你已经审核了requirements.md吗？ [y/N]: y
 📄 Please review: .kiro/specs/feature-name/design.md
-❓ design.mdをレビューしましたか？ [y/N]: y
+❓ 你已经审核了design.md吗？ [y/N]: y
 ✅ Requirements and Design approved automatically. Proceeding with tasks generation...
 ```
 

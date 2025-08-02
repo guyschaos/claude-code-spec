@@ -51,7 +51,7 @@ Create initial metadata with approval tracking and project description:
   "project_description": "$ARGUMENTS",
   "created_at": "current_timestamp",
   "updated_at": "current_timestamp",
-  "language": "japanese",
+  "language": "simplified chinese",
   "phase": "initialized",
   "approvals": {
     "requirements": {

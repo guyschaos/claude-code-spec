@@ -17,7 +17,7 @@ Create comprehensive technical design for feature: **$ARGUMENTS**
 
 **Interactive Approval Process**:
 1. **Check if requirements exist** - Verify that requirements.md has been generated
-2. **Prompt for human review** - Ask user: "requirements.mdをレビューしましたか？ [y/N]"
+2. **Prompt for human review** - Ask user: "你已经审核了requirements.md吗？ [y/N]"
 3. **If 'y' (yes)**: Automatically update spec.json to approve requirements and proceed with design generation
 4. **If 'N' (no)**: Stop execution and instruct user to review requirements.md first
 

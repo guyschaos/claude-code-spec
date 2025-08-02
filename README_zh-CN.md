@@ -1,7 +1,7 @@
 # Claude Code 规格驱动开发
 
 > 🌐 **语言**  
-> 📖 **简体中文说明**（本页）| 📖 **[English Version](README_en.md)** | 📖 **[日本語版 README](README_ja.md)** | 📖 **[繁体中文说明](README_zh-TW.md)**
+> 📖 **[简体中文说明](README_zh-CN.md)**（本页）| 📖 **[English Version](README_en.md)** | 📖 **[日本語版 README](README_ja.md)** | 📖 **[繁体中文说明](README_zh-TW.md)**
 
 > [!警告]
 > 这是初始版本，将随着使用逐步改进
